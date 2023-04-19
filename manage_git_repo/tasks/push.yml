@@ -1,0 +1,86 @@
+---
+# - name: Adding Key
+#   ansible.builtin.include_tasks: unpack.yml
+
+- name: Set repo path
+  ansible.builtin.set_fact:
+    git_repo_path: "{{ git_url | basename | regex_replace('.git', '') }}"
+
+- name: Debug
+  ansible.builtin.debug:
+    var: git_repo_path
+
+- name: Create Host Vars using Jinja2
+  ansible.builtin.template:
+    src: devserver.j2
+    dest: '{{ localrepo }}/inventories/staging/host_vars/devserver2.yml'
+    mode: '0664'
+
+- name: Git Add all new files
+  ansible.builtin.command: git add -A
+  args:
+    chdir: '{{ playbook_dir }}/{{ git_repo_path }}'
+
+- name: Git Status
+  ansible.builtin.command: git status
+  args:
+    chdir: '{{ playbook_dir }}/{{ git_repo_path }}'
+  register: git_add_status
+
+- name: Git Username
+  ansible.builtin.command: git config user.name '{{ git_username }}'
+  args:
+    chdir: '{{ playbook_dir }}/{{ git_repo_path }}'
+  when: git_username is defined
+
+- name: Git Email
+  ansible.builtin.command: git config user.email '{{ git_email }}'
+  args:
+    chdir: '{{ playbook_dir }}/{{ git_repo_path }}'
+  when: git_email is defined
+
+- name: Git Commit
+  ansible.builtin.command: git commit -a -m '{{ git_msg }}'
+  args:
+    chdir: '{{ playbook_dir }}/{{ git_repo_path }}'
+  ignore_errors: true
+  register: ignored_errors
+
+# - name: Git wrapper
+#   ansible.builtin.copy:
+#     dest: '{{ playbook_dir }}/.ssh/ssh'
+#     content: 'ssh -i {{ git_temp_file.path }} -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $*'
+#     mode: '0700'
+
+- name: Git Push
+  block:
+    - name: Git Push
+      ansible.builtin.command: git push --force
+      args:
+        chdir: '{{ playbook_dir }}/{{ git_repo_path }}'
+    # environment:
+  #   GIT_SSH: '{{ playbook_dir }}/.ssh/ssh'
+  rescue:
+    - name: Remove Created Directory
+      ansible.builtin.command: rm -fr '{{ playbook_dir }}/{{ git_repo_path }}'
+      args:
+        removes: '{{ playbook_dir }}/{{ git_repo_path }}'
+      when: git_add_status
+      changed_when: false
+
+- name: Git Status
+  ansible.builtin.command: git status
+  args:
+    chdir: '{{ playbook_dir }}/{{ git_repo_path }}'
+  register: git_add_status
+
+- name: Remove Created Directory
+  ansible.builtin.command: rm -fr '{{ playbook_dir }}/{{ git_repo_path }}'
+  args:
+    removes: '{{ playbook_dir }}/{{ git_repo_path }}'
+  when: git_add_status
+  changed_when: false
+
+
+# - name: Cleanup Keys
+#   ansible.builtin.include_tasks: cleanup_keys.yml
