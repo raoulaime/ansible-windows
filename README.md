@@ -1,4 +1,4 @@
-para
+
 # winrm: ConfigureRemotingForAnsible.ps1
 Script to activate winrm with self signed certificate
 
