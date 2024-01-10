@@ -1,0 +1,21 @@
+---
+exclude_paths:
+  - .vscode
+  - .github
+  - .settings
+
+skip_list:
+  - skip_this_tag
+  - yaml[line-length]
+  - var-naming[no-role-prefix]
+  - yaml[braces]
+  - schema[meta]
+  - name[template]
+  - yaml[indentation
+
+var_naming_pattern: "^[a-z_][a-z0-9_]*$"
+use_default_rules: true
+rulesdir:
+  - ./
+
+offline: false

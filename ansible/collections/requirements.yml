@@ -1,0 +1,21 @@
+---
+collections:
+  - name: awx.awx
+  - name: azure.azcollection
+  - name: amazon.aws
+  - name: ansible.windows
+  - name: ansible.scm
+  - name: microsoft.ad
+  - name: redhat_cop.controller_configuration
+  - name: infra.controller_configuration
+  - name: redhat_cop.tower_configuration
+  - name: redhat_cop.ee_utilities
+  - name: redhat_cop.ah_configuration
+  - name: containers.podman
+  - name: cloud.terraform
+  - name: kubernetes.core
+  - name: vmware.vmware_rest
+  - name: community.vmware
+  - name: community.windows
+  - name: community.general
+  - name: ansible.posix

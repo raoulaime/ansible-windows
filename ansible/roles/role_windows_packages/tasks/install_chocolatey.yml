@@ -32,7 +32,7 @@
   register: _install_choco_package
   failed_when: _install_choco_package.rc > 1
 
-- name: Windows | Reboot to complete Choco install  # noqa: no-handler
+- name: Windows | Reboot to complete Powershell 5.0 install  # noqa: no-handler
   ansible.windows.win_reboot:
     pre_reboot_delay: "{{ windows_pre_reboot_delay | default(10) }}"
     reboot_timeout: "{{ windows_reboot_timeout | default(3600) }}"

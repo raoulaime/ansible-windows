@@ -1,0 +1,26 @@
+---
+- name: Install packages
+  block:
+    - name: Install Windows softwares
+      chocolatey.chocolatey.win_chocolatey:
+        name: '{{ item.name }}'
+        version: '{{ item.version | default(omit) }}'
+        state: present
+      loop: '{{ softwares_list }}'
+      register: _installed_succeed
+
+  rescue:
+    - name: Install Windows softwares (rescue)
+      chocolatey.chocolatey.win_chocolatey:
+        name: '{{ item.name }}'
+        version: '{{ item.version | default(omit) }}'
+        state: latest
+      loop: '{{ softwares_list }}'
+      register: _rescue_install_packages
+      until: _rescue_install_packages is success
+      retries: 5
+      delay: 10
+
+- name: Check return
+  ansible.builtin.debug:
+    var: _installed_succeed | to_nice_json
