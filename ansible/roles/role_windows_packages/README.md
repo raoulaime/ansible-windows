@@ -18,39 +18,71 @@ Ansible >= 2.1.
 
 None.
 
-## ⚡ Installation
-
-### Install with Ansible Galaxy
-
-```shell
-ansible-galaxy install role_windows_packages
-```
-
-### Install with git
-
-If you do not want a global installation, clone it into your `roles_path`.
-
-```bash
-git clone   role_windows_packages
-```
-
-But I often add it as a submodule in a given `playbook_dir` repository.
-
-```bash
-git submodule add  roles/role_windows_packages
-```
-
-As the role is not managed by Ansible Galaxy, you do not have to specify the
-github user account.
 
 ### ✏️ Example Playbook
 
 Basic usage is:
 
 ```yaml
-- hosts: all
-  roles:
-    - role: role_windows_packages
+- name: Windows Automation install packages
+  hosts: windows
+  gather_facts: true
+  tasks:
+    - name: Configure Chocolatey Package Manager
+      ansible.builtin.include_role:
+        name: role_windows_packages
+        tasks_from: install_chocolatey
+      when: install_chocolatey | default(true) | bool
+
+    - name: Install Windows Packages
+      ansible.builtin.include_role:
+        name: role_windows_packages
+        tasks_from: install_packages
+      when: install_packages | default(true) | bool
+      vars:
+        softwares_list:
+          - name: procexp
+          - name: putty
+          - name: rdcman
+          - name: sysinternals
+          - name: bginfo
+          - name: microsoft-edge
+            version: 120.0.2210.91
+
+          - name: notepadplusplus
+            version: 8.6.0
+
+          - name: 7zip
+            version: 23.1.0
+
+          - name: python
+            version: 3.12.1
+
+          - name: adobereader
+            version: 2023.8.20458
+
+          - name: sql-server-management-studio
+            version: 19.2.56.2
+
+          - name: openssh
+            version: 8.6.0-beta1
+
+          - name: vscode
+            version: 1.85.1
+
+          - name: powershell-core
+            version: 7.4.0
+
+          - name: winscp
+            version: 6.1.2
+
+
+    - name: Update packages
+      ansible.builtin.include_role:
+        name: role_windows_packages
+        tasks_from: upgrade_packages
+      when: upgrade_packages | default(false) | bool
+
 ```
 
 ## ⚙️ Role Variables
@@ -81,4 +113,4 @@ Variables loaded from `vars/main.yml`.
 
 ## Author Information
 
-your company (optional)
+Raoul-Aime
