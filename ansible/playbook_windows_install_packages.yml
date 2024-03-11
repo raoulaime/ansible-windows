@@ -3,7 +3,7 @@
   hosts: all
   gather_facts: false
   tasks:
-    - name: Check if Ansible limit is set  # noqa: run-once[task]
+    - name: Check if Ansible limit is set # noqa: run-once[task]
       ansible.builtin.assert:
         that:
           - ansible_limit is defined
