@@ -15,29 +15,54 @@ spec:
   web_replicas: 1
   task_replicas: 2
 
-  web_resource_requirements:
+  task_resource_requirements:
     requests:
-      cpu: 1000m
-      memory: 2Gi
+      cpu: 100m
+      memory: 128Mi
+      ephemeral-storage: 100M
     limits:
       cpu: 2000m
       memory: 4Gi
-  task_resource_requirements:
+      ephemeral-storage: 500M
+  web_resource_requirements:
     requests:
-      cpu: 500m
-      memory: 1Gi
+      cpu: 100m
+      memory: 128Mi
     limits:
       cpu: 1000m
-      memory: 8Gi
+      memory: 4Gi
   ee_resource_requirements:
     requests:
-      cpu: 500m
-      memory: 1Gi
+      cpu: 100m
+      memory: 64Mi
+    limits:
+      cpu: 1000m
+      memory: 4Gi
+  redis_resource_requirements:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 1000m
+      memory: 4Gi
+  rsyslog_resource_requirements:
+    requests:
+      cpu: 100m
+      memory: 128Mi
     limits:
       cpu: 1000m
       memory: 2Gi
-  init_container_resource_requirements: {}
-  postgres_init_container_resource_requirements: {}
-  postgres_resource_requirements: {}
-  redis_resource_requirements: {}
-  rsyslog_resource_requirements: {}
+  init_container_resource_requirements:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 1000m
+      memory: 2Gi
+  postgres_init_container_resource_requirements:
+    requests:
+      cpu: 10m
+      memory: 64Mi
+    limits:
+      cpu: 1000m
+      memory: 2Gi
