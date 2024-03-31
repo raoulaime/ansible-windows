@@ -15,7 +15,7 @@ spec:
     environment: testing
   auto_upgrade: true
   web_replicas: 1
-  task_replicas: 2
+  task_replicas: 1
 
   task_resource_requirements:
     requests:
