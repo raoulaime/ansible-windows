@@ -11,7 +11,7 @@ spec:
     - hostname: awx.home.kenitrahub.com
       tls_secret: awx-secret-tls
   ingress_annotations: |
-    cert-manager.io/issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     environment: testing
   auto_upgrade: true
   web_replicas: 1
