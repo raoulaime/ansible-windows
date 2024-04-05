@@ -10,6 +10,7 @@ spec:
   postgres_init_container_commands: |
     chown 26:0 /var/lib/pgsql/data
     chmod 700 /var/lib/pgsql/data
+    chmod 700 /var/lib/pgsql/userdata
   ingress_type: ingress
   ingress_hosts:
     - hostname: awx.home.kenitrahub.com
