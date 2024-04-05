@@ -17,7 +17,6 @@ spec:
       tls_secret: awx-secret-tls
   ingress_annotations: |
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    environment: testing
   auto_upgrade: true
   web_replicas: 1
   task_replicas: 1
