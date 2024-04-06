@@ -7,11 +7,10 @@ metadata:
 spec:
   postgres_storage_class: longhorn
   postgres_data_volume_init: true
-  postgres_init_container_commands: |
-    chown 26:0 /var/lib/pgsql/data
-    chmod 700 /var/lib/pgsql/data
-    mkdir /var/lib/pgsql/userdata
-    chmod 700 /var/lib/pgsql/userdata
+  # postgres_init_container_commands: |
+  #   chown 26:0 /var/lib/pgsql/data
+  #   chmod 700 /var/lib/pgsql/data
+  #   chmod 700 /var/lib/pgsql/userdata
   ingress_type: ingress
   ingress_hosts:
     - hostname: awx.home.kenitrahub.com
@@ -59,17 +58,17 @@ spec:
     limits:
       cpu: 1000m
       memory: 2Gi
-  init_container_resource_requirements:
-    requests:
-      cpu: 100m
-      memory: 128Mi
-    limits:
-      cpu: 1000m
-      memory: 2Gi
-  postgres_init_container_resource_requirements:
-    requests:
-      cpu: 10m
-      memory: 64Mi
-    limits:
-      cpu: 1000m
-      memory: 2Gi
+  # init_container_resource_requirements:
+  #   requests:
+  #     cpu: 100m
+  #     memory: 128Mi
+  #   limits:
+  #     cpu: 1000m
+  #     memory: 2Gi
+  # postgres_init_container_resource_requirements:
+  #   requests:
+  #     cpu: 10m
+  #     memory: 64Mi
+  #   limits:
+  #     cpu: 1000m
+  #     memory: 2Gi
