@@ -17,9 +17,9 @@ secretGenerator:
       - password=Ansible123!
 
 resources:
-  - github.com/fosterseth/awx-operator/config/default?ref=2.14.0
+  - github.com/ansible/awx-operator/config/default?ref=2.14.0
   - awx.yaml
 
 images:
   - name: quay.io/fosterseth/awx-operator
-    newTag: postgres_init
+    newTag: 2.14.0
