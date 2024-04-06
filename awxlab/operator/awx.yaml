@@ -7,11 +7,19 @@ metadata:
 spec:
   postgres_storage_class: longhorn
   postgres_data_volume_init: true
+  postgres_data_path: /var/lib/pgsql/data/pgdata
   postgres_security_context_settings:
     fsGroup: 26
+    fsGroupChangePolicy: Always
+    runAsGroup: 26
+    runAsNonRoot: true
+    runAsUser: 26
+    supplementalGroups:
+      - 26
   init_postgres_extra_commands: |
-    chown 26:0 /var/lib/pgsql/data
-    chmod 700 /var/lib/pgsql/data
+    mkdir /var/lib/pgsql/data/userdata
+    chown 26:26 /var/lib/pgsql/data/userdata
+    chmod 700 /var/lib/pgsql/data/userdata
 
   ingress_type: ingress
   ingress_hosts:
