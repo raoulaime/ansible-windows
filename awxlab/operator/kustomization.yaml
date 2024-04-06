@@ -17,10 +17,10 @@ secretGenerator:
       - password=Ansible123!
 
 resources:
-  - github.com/ansible/awx-operator/config/default?ref=2.12.2
+  - github.com/ansible/awx-operator/config/default?ref=2.14.0
   - awx.yaml
   - awx-mesh-ingress.yaml
 
 images:
   - name: quay.io/fosterseth/awx-operator
-    newTag: 2.12.2
+    newTag: 2.14.0
