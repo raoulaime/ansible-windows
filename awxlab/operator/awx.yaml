@@ -8,21 +8,12 @@ spec:
   admin_user: admin
   admin_password_secret: awx-admin-password
   postgres_storage_class: longhorn
-  postgres_data_volume_init: true
-
-  postgres_init_container_extra_commands: |
-    mkdir /var/lib/pgsql/data/userdata
-    chown 26:0 /var/lib/pgsql/data/userdata
-    chmod 700 /var/lib/pgsql/data/userdata
-    chown 26:0 /var/lib/pgsql/data
-    chmod 700 /var/lib/pgsql/data
-
   ingress_type: ingress
   ingress_hosts:
     - hostname: awx.home.kenitrahub.com
       tls_secret: awx-secret-tls
   ingress_annotations: |
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/issuer: letsencrypt-prod
   auto_upgrade: true
   web_replicas: 1
   task_replicas: 1
