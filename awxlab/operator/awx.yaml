@@ -12,7 +12,7 @@ spec:
 
   init_postgres_extra_commands: |
     mkdir /var/lib/pgsql/data/userdata
-    chown 26:0 /var/lib/pgsql/userdata
+    chown 26:0 /var/lib/pgsql/data/userdata
     chmod 700 /var/lib/pgsql/data/userdata
     chown 26:0 /var/lib/pgsql/data
     chmod 700 /var/lib/pgsql/data
