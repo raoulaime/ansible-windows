@@ -14,6 +14,7 @@ secretGenerator:
 resources:
   - github.com/ansible/awx-operator/config/default?ref=2.13.1
   - awx.yaml
+  - awx-mesh-ingress.yaml
 
 images:
   - name: quay.io/ansible/awx-operator
