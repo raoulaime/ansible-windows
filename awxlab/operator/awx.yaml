@@ -7,6 +7,9 @@ metadata:
 spec:
   postgres_storage_class: longhorn
   postgres_data_volume_init: true
+  postgres_init_container_commands: |
+    chown 26:0 /var/lib/pgsql/data
+    chmod 700 /var/lib/pgsql/data
 
   ingress_type: ingress
   ingress_hosts:
