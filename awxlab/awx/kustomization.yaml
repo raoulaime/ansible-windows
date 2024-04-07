@@ -7,10 +7,6 @@ generatorOptions:
   disableNameSuffixHash: true
 
 secretGenerator:
-  - name: redhat-operators-pull-secret
-    literals:
-      - operator=awx
-
   - name: awx-admin-password
     type: Opaque
     literals:
