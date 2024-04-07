@@ -8,6 +8,7 @@ spec:
   admin_user: admin
   admin_password_secret: awx-admin-password
   postgres_storage_class: longhorn
+  postgres_data_path: /var/lib/postgresql/data/pgdata
   postgres_data_volume_init: true
   init_postgres_extra_commands: |
     mkdir /var/lib/pgsql/data/userdata
