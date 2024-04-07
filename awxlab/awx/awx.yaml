@@ -27,7 +27,7 @@ spec:
     requests:
       storage: 8Gi
     limits:
-      storage: 50Gi
+      storage: 20Gi
   postgres_data_volume_init: true
   postgres_security_context_settings:
     fsGroup: 26
