@@ -8,6 +8,10 @@ spec:
   admin_user: admin
   admin_password_secret: awx-admin-password
   postgres_storage_class: longhorn
+  postgres_data_volume_init: true
+  init_postgres_extra_commands: |
+    chown 26:0 /var/lib/pgsql/data
+    chmod 700 /var/lib/pgsql/data
   ingress_type: ingress
   ingress_hosts:
     - hostname: awx.home.kenitrahub.com
