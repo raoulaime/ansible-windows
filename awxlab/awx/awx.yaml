@@ -31,7 +31,7 @@ spec:
     cert-manager.io/issuer: letsencrypt-prod
   auto_upgrade: true
   web_replicas: 1
-  task_replicas: 1
+  task_replicas: 2
   task_resource_requirements:
     requests:
       cpu: 100m
