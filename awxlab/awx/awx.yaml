@@ -7,11 +7,22 @@ metadata:
 spec:
   admin_user: admin
   admin_password_secret: awx-admin-password
+  postgres_resource_requirements:
+    requests:
+      cpu: 500m
+      memory: 2Gi
+    limits:
+      cpu: '1'
+      memory: 4Gi
+  postgres_storage_requirements:
+    requests:
+      storage: 8Gi
+    limits:
+      storage: 50Gi
   postgres_storage_class: longhorn
   postgres_data_volume_init: true
-  postgres_init_container_commands: |
-    chown 26:0 /var/lib/pgsql/data
-    chmod 700 /var/lib/pgsql/data
+  postgres_security_context_settings:
+    fsGroup: 26
   ingress_type: ingress
   ingress_hosts:
     - hostname: awx.home.kenitrahub.com
