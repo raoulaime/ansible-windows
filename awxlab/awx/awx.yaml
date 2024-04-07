@@ -10,6 +10,9 @@ spec:
   postgres_storage_class: longhorn
   postgres_data_volume_init: true
   init_postgres_extra_commands: |
+    mkdir /var/lib/pgsql/data/userdata
+    chown 26:0 /var/lib/pgsql/data/userdata
+    chmod 700 /var/lib/pgsql/data/userdata
     chown 26:0 /var/lib/pgsql/data
     chmod 700 /var/lib/pgsql/data
   ingress_type: ingress
