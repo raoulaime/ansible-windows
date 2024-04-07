@@ -11,9 +11,11 @@ secretGenerator:
     literals:
       - operator=awx
 
-resources:
-  - github.com/ansible/awx-operator/config/default?ref=2.14.0
+  - name: awx-admin-password
+    type: Opaque
+    literals:
+      - password=Ansible123!
 
-images:
-  - name: quay.io/ansible/awx-operator
-    newTag: 2.14.0
+resources:
+  - awx.yaml
+  - awx-mesh-ingress.yaml
