@@ -5,8 +5,32 @@ metadata:
   name: awx
   namespace: awx
 spec:
+  web_replicas: 1
+  task_replicas: 2
   admin_user: admin
   admin_password_secret: awx-admin-password
+  ingress_type: ingress
+  ingress_class_name: nginx
+  ingress_hosts:
+    - hostname: awx.home.kenitrahub.com
+      tls_secret: awx-secret-tls
+  ingress_annotations: |
+    cert-manager.io/issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    environment: testing
+  projects_persistence: true
+  projects_storage_access_mode: ReadWriteMany
+  projects_storage_class: longhorn
+  projects_storage_size: 20Gi
+  postgres_storage_class: longhorn
+  postgres_storage_requirements:
+    requests:
+      storage: 8Gi
+    limits:
+      storage: 50Gi
+  postgres_data_volume_init: true
+  postgres_security_context_settings:
+    fsGroup: 26
   postgres_resource_requirements:
     requests:
       cpu: 500m
@@ -14,24 +38,6 @@ spec:
     limits:
       cpu: '1'
       memory: 4Gi
-  postgres_storage_requirements:
-    requests:
-      storage: 8Gi
-    limits:
-      storage: 50Gi
-  postgres_storage_class: longhorn
-  postgres_data_volume_init: true
-  postgres_security_context_settings:
-    fsGroup: 26
-  ingress_type: ingress
-  ingress_hosts:
-    - hostname: awx.home.kenitrahub.com
-      tls_secret: awx-secret-tls
-  ingress_annotations: |
-    cert-manager.io/issuer: letsencrypt-prod
-  auto_upgrade: true
-  web_replicas: 1
-  task_replicas: 2
   task_resource_requirements:
     requests:
       cpu: 100m
