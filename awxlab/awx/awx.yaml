@@ -18,11 +18,11 @@ spec:
     cert-manager.io/issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/rewrite-target: /
     environment: testing
-  projects_persistence: true
-  projects_storage_access_mode: ReadWriteMany
-  projects_storage_class: longhorn
-  projects_storage_size: 10Gi
-  postgres_storage_class: longhorn
+  # projects_persistence: true
+  # projects_storage_access_mode: ReadWriteMany
+  # projects_storage_class: longhorn
+  # projects_storage_size: 10Gi
+  # postgres_storage_class: longhorn
   postgres_storage_requirements:
     requests:
       storage: 8Gi
